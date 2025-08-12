@@ -23,6 +23,21 @@ const { build } = require('esbuild');
         },
     );
 
+    let content_a = fs.readFileSync(path.join(__dirname, 'sub-store-node.min.js'), {
+        encoding: 'utf8',
+    });
+    content_a = content_a.replace(
+        /eval\(('|")(require\(('|").*?('|")\))('|")\)/g,
+        '$2',
+    );
+    fs.writeFileSync(
+        path.join(__dirname, 'dist/sub-store-node.no-bundle.js'),
+        content_a,
+        {
+            encoding: 'utf8',
+        },
+    );
+
     await build({
         entryPoints: ['dist/sub-store.no-bundle.js'],
         bundle: true,
@@ -32,12 +47,31 @@ const { build } = require('esbuild');
         format: 'cjs',
         outfile: 'dist/sub-store.bundle.js',
     });
+    await build({
+        entryPoints: ['dist/sub-store-node.no-bundle.js'],
+        bundle: true,
+        minify: true,
+        sourcemap: true,
+        platform: 'node',
+        format: 'cjs',
+        outfile: 'dist/sub-store-node.bundle.js',
+    });
     fs.writeFileSync(
         path.join(__dirname, 'dist/sub-store.bundle.js'),
         `// SUB_STORE_BACKEND_VERSION: ${version}
 ${fs.readFileSync(path.join(__dirname, 'dist/sub-store.bundle.js'), {
-    encoding: 'utf8',
-})}`,
+            encoding: 'utf8',
+        })}`,
+        {
+            encoding: 'utf8',
+        },
+    );
+    fs.writeFileSync(
+        path.join(__dirname, 'dist/sub-store-node.bundle.js'),
+        `// SUB_STORE_BACKEND_VERSION: ${version}
+${fs.readFileSync(path.join(__dirname, 'dist/sub-store-node.bundle.js'), {
+            encoding: 'utf8',
+        })}`,
         {
             encoding: 'utf8',
         },
