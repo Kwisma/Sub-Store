@@ -3,7 +3,9 @@ const { build } = require('esbuild');
 
 !(async () => {
     const artifacts = [
-        { src: 'src/main.js', dest: 'sub-store.min.js' },
+        { src: 'src/main.js', dest: 'sub-store.min.js' }
+    ];
+    const artifacts_a = [
         { src: 'src/core/app.js', dest: 'sub-store-node.min.js' },
     ];
 
@@ -16,6 +18,17 @@ const { build } = require('esbuild');
             platform: 'node',
             format: 'cjs',
             outfile: artifact.dest,
+        });
+    }
+    for await (const artifact_a of artifacts_a) {
+        await build({
+            entryPoints: [artifact_a.src],
+            bundle: true,
+            minify: false,
+            sourcemap: false,
+            platform: 'node',
+            format: 'esm',
+            outfile: artifact_a.dest,
         });
     }
 })()
