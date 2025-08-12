@@ -53,7 +53,7 @@ const { build } = require('esbuild');
         minify: true,
         sourcemap: true,
         platform: 'node',
-        format: 'cjs',
+        format: 'esm',
         outfile: 'dist/sub-store-node.bundle.js',
     });
     fs.writeFileSync(
