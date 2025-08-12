@@ -6,7 +6,7 @@ const { build } = require('esbuild');
         { src: 'src/main.js', dest: 'sub-store.min.js' }
     ];
     const artifacts_a = [
-        { src: 'src/core/app.js', dest: 'sub-store-node.min.js' },
+        { src: 'src/core/proxy-utils/index.js', dest: 'sub-store-node.min.js' },
     ];
 
     for await (const artifact of artifacts) {
