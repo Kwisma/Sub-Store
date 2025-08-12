@@ -10,7 +10,7 @@ const { build } = require('esbuild');
 
     const artifacts = [
         { src: 'src/main.js', dest: 'sub-store.min.js' },
-        { src: 'src/core/app.js', dest: 'sub-store-node.min.js' },
+        { src: 'src/core/proxy-utils/index.js', dest: 'sub-store-node.min.js' },
         {
             src: 'src/products/resource-parser.loon.js',
             dest: 'dist/sub-store-parser.loon.min.js',
