@@ -90,7 +90,7 @@ ${fs.readFileSync(path.join(__dirname, 'dist/sub-store.bundle.js'), {
         minify: true,
         sourcemap: false,
         platform: 'node',
-        format: 'cjs',
+        format: 'esm',
         outfile: 'dist/sub-store-node.bundle.js',
     });
     fs.writeFileSync(
