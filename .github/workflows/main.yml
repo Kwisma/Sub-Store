@@ -66,7 +66,8 @@ jobs:
             ./backend/dist/sub-store-parser.loon.min.js
             ./backend/dist/cron-sync-artifacts.min.js
             ./backend/dist/sub-store.bundle.js
-            ./backend/dist/sub-store-node.min.js
+            ./backend/sub-store-node.min.js
+            ./backend/dist/sub-store-node.bundle.js
       - name: Git push assets to "release" branch
         run: |
           cd backend/dist || exit 1
